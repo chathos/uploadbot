@@ -150,7 +150,7 @@ while (true) {
                                         'attributes' => [
                                           [
                                             '_' => 'documentAttributeFilename',
-                                            'file_name' => "@MadeLineProto " . $file_name
+                                            'file_name' => $file_name
                                           ]
                                         ]
                                       ],
