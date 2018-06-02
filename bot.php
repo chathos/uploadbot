@@ -105,7 +105,7 @@ while (true) {
                                   $file_path = $conversations[$destination]["downloadDir"];
                                   $caption = '' . $file_name . '       Uploaded using @MadeLineProto ';
                                   $mimetype = mime_content_type($file_path);
-                                  if(startsWith($mimetype, "video")) {
+                                  /*if(startsWith($mimetype, "video")) {
                                     $sentMessage = $MadelineProto->messages->sendMedia([
                                       'peer' => $destination,
                                       'media' => [
@@ -132,7 +132,7 @@ while (true) {
                                       'parse_mode' => 'Markdown'
                                     ]);
                                   }
-                                  else {
+                                  else {*/
                                     $sentMessage = $MadelineProto->messages->sendMedia([
                                       'peer' => $destination,
                                       'media' => [
@@ -157,7 +157,7 @@ while (true) {
                                       'message' => $caption,
                                       'parse_mode' => 'Markdown'
                                     ]);
-                                  }
+                                  // }
 
                                   // var_dump($sentMessage);
                                   // TODO: delete the original file, after successful UPLOAD
