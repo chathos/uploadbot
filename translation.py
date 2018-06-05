@@ -4,4 +4,4 @@ class Translation(object):
     FREE_USER_LIMIT = "Free users are limited to 500MB files."
     STILL_NOT_HANDLED_MSG = "I do not know what to do with this message, yet!"
     URL_FILE_SEPERATOR = "|"
-    STOP_TEXT = "Please share https://github.com/SpEcHiDe/UploadBot and make Telegram great again!"
+    STOP_TEXT = "Please share https://github.com/SpEcHiDe/YAUploadBot and make Telegram great again!"

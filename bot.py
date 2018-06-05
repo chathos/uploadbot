@@ -38,7 +38,7 @@ def is_downloadable(url):
         return False
     if 'html' in content_type.lower():
         return False
-    content_length = header.get('content-length', None)
+    content_length = int(header.get('content-length', None))
     if content_length and content_length > Config.MAX_FILE_SIZE:  # 200 mb approx
         return False
     return True
@@ -69,38 +69,46 @@ def DownLoadFile(url, file_name):
     return file_name
 
 def process_update(update):
-    if update.message.media is not None:
-        client.send_message(update.message.from_id, Translation.STILL_NOT_HANDLED_MSG)
-    else:
-        if update.message.message.startswith("http"):
-            received_id = update.message.from_id
-            received_message = update.message.message
-            url = ""
-            file_name = ""
-            if Translation.URL_FILE_SEPERATOR in received_message:
-                url, file_name = received_message.split(Translation.URL_FILE_SEPERATOR)
-            else:
-                url = received_message
-                # get file name from Content Disposition
-                r = requests.head(url, allow_redirects=True)
-                file_name = get_filename_from_cd(r.headers.get('content-disposition'))
-                # the above thing NEVER works, FallBack:
-                if file_name is None:
-                    file_name = url.split("/")[-1]
-            # received the `url` and `file_name` here! Do something magical with it!
-            if is_downloadable(url):
-                m1 = client.send_message(received_id, "Trying to download provided Link")
-                # download file_name to Config.DOWNLOAD_LOCATION
-                t = DownLoadFile(url, Config.DOWNLOAD_LOCATION + "/" + file_name)
-                client.edit_message(received_id, m1.id, "Downloaded. Trying to upload to Telegram")
-                # upload file to Telegram
-                client.send_file(received_id, t, caption=Translation.STOP_TEXT, force_document=True, progress_callback=progress_response_callback_handler, allow_cache=False)
-                # It worked!
-                client.edit_message(received_id, m1.id, Translation.STOP_TEXT)
-            else:
-                client.send_message(update.message.from_id, Translation.FREE_USER_LIMIT)
+    if update.message.from_id in Config.AUTHORIZED_USERS:
+        if update.message.media is not None:
+            media_message = update.message.media
+            directory_name = Config.DOWNLOAD_LOCATION
+            m1 = client.send_message(update.message.from_id, "Requesting download ... Please be patient")
+            downloaded_file_location = client.download_media(media_message, directory_name, progress_response_callback_handler)
+            client.edit_message(update.message.from_id, m1, "Downloaded Successfully. " + str(Config.EXAMPLE_WEB_DOMAIN) + "/" + str(downloaded_file_location) + "")
         else:
-            m3 = client.send_message(update.message.from_id, Translation.START_TEXT)
+            if update.message.message.startswith("http"):
+                received_id = update.message.from_id
+                received_message = update.message.message
+                url = ""
+                file_name = ""
+                if Translation.URL_FILE_SEPERATOR in received_message:
+                    url, file_name = received_message.split(Translation.URL_FILE_SEPERATOR)
+                else:
+                    url = received_message
+                    # get file name from Content Disposition
+                    r = requests.head(url, allow_redirects=True)
+                    file_name = get_filename_from_cd(r.headers.get('content-disposition'))
+                    # the above thing NEVER works, FallBack:
+                    if file_name is None:
+                        file_name = url.split("/")[-1]
+                # received the `url` and `file_name` here! Do something magical with it!
+                if is_downloadable(url):
+                    m1 = client.send_message(received_id, "Trying to download provided Link")
+                    # download file_name to Config.DOWNLOAD_LOCATION
+                    t = DownLoadFile(url, Config.DOWNLOAD_LOCATION + "/" + file_name)
+                    client.edit_message(received_id, m1.id, "Downloaded. Trying to upload to Telegram")
+                    # upload file to Telegram
+                    client.send_file(received_id, t, caption=Translation.STOP_TEXT, force_document=True, progress_callback=progress_response_callback_handler, allow_cache=False)
+                    # It worked!
+                    os.remove(t)
+                    client.edit_message(received_id, m1.id, Translation.STOP_TEXT)
+                else:
+                    client.send_message(update.message.from_id, Translation.FREE_USER_LIMIT)
+            else:
+                m3 = client.send_message(update.message.from_id, Translation.START_TEXT)
+    else:
+        client.send_message(update.message.from_id, Translation.STILL_NOT_HANDLED_MSG)
 
 if __name__ == "__main__":
     client = TelegramClient(
@@ -116,5 +124,7 @@ if __name__ == "__main__":
         client.sign_in(bot_token=Config.TG_BOT_TOKEN)
     me = client.get_me()
     logger.info(me.stringify())
+    if not os.path.exists(Config.DOWNLOAD_LOCATION):
+        os.makedirs(Config.DOWNLOAD_LOCATION)
     client.add_event_handler(process_update)
     client.idle()  # ends with Ctrl+C
