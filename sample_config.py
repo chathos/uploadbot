@@ -7,6 +7,8 @@ class Config(object):
     TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
     # the domain of your web server
     EXAMPLE_WEB_DOMAIN = os.environ.get("EXAMPLE_WEB_DOMAIN", "https://example.com")
+    # port the web server should listen on
+    EXAMPLE_WEB_PORT = int(os.environ.get("EXAMPLE_WEB_PORT", 5000))
     # the download location, where the HTTP Server runs
     DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "DOWNLOADS")
     # Telegram maximum file upload size
@@ -20,3 +22,5 @@ class Config(object):
     TL_SESSION = "madeline.session"
     # Python3 ReQuests CHUNK SIZE
     CHUNK_SIZE = 128
+    # localhost PLEASE DO NOT CHANGE THIS VALUE #ForTheGreaterGood
+    EXAMPLE_WEB_HOST = "127.0.0.1"

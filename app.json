@@ -23,6 +23,10 @@
       "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
       "value": ""
     },
+    "EXAMPLE_WEB_PORT": {
+      "description": "The Heroku App port, usually 5000",
+      "value": "5000"
+    },
     "DOWNLOAD_LOCATION": {
       "description": "the download location, where the HTTP Server runs",
       "value": "DOWNLOADS"

@@ -26,6 +26,8 @@ import os
 # https://www.codementor.io/aviaryan/downloading-files-from-urls-in-python-77q3bs0un
 import requests
 import re
+# https://stackoverflow.com/a/19706670/4723940
+import http.server
 
 def is_downloadable(url):
     """
@@ -127,4 +129,9 @@ if __name__ == "__main__":
     if not os.path.exists(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
     client.add_event_handler(process_update)
+    # # create a http.server
+    # server_address = (Config.EXAMPLE_WEB_HOST, Config.EXAMPLE_WEB_PORT)
+    # httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
+    # # https://stackoverflow.com/a/19706670/4723940
+    # httpd.start()
     client.idle()  # ends with Ctrl+C
