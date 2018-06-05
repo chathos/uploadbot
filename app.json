@@ -1,0 +1,47 @@
+{
+  "name": "Yet Another UploadBot",
+  "description": "Build and Deploy your own UploadBot",
+  "keywords": [
+    "telegram",
+    "best",
+    "upload",
+    "download",
+    "bot"
+  ],
+  "logo": "https://i.imgur.com/0imUhtI.jpg",
+  "repository": "https://github.com/SpEcHiDe/YAUploadBot",
+  "env": {
+    "BOTAN_IO_TOKEN": {
+      "description": "get a token from http://botan.io",
+      "value": ""
+    },
+    "TG_BOT_TOKEN": {
+      "description": "get a token from @BotFather",
+      "value": ""
+    },
+    "EXAMPLE_WEB_DOMAIN": {
+      "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
+      "value": ""
+    },
+    "DOWNLOAD_LOCATION": {
+      "description": "the download location, where the HTTP Server runs",
+      "value": "DOWNLOADS"
+    },
+    "MAX_FILE_SIZE": {
+      "description": "Telegram maximum file upload size",
+      "value": "50000000"
+    },
+    "APP_ID": {
+      "description": "Get your own APP_ID from https://my.telegram.org",
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Get your own API_HASH from https://my.telegram.org",
+      "value": ""
+    },
+    "AUTHORIZED_USERS": {
+      "description": "comma seperated values of Telegram IDs obtained from https://telegram.dog/GetIDsBot",
+      "value": ""
+    }
+  }
+}
