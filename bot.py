@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 # the secret configuration specific things
-from config.sample import Config
+from sample_config import Config
 # the Strings used for this "thing"
 from translation import Translation
 
