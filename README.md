@@ -9,7 +9,7 @@ YAUploadBot requires [Python](https://www.python.org/downloads/) >= 3.4.0.
 ## Configuration
 
 ## The Easy Way
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SpEcHiDe/YAUploadBot/tree/Python-Telethon)
 
 ## The Hard Way
 
