@@ -117,7 +117,7 @@ if __name__ == "__main__":
         Config.TL_SESSION,
         Config.APP_ID,
         Config.API_HASH,
-        update_workers = 4,
+        update_workers = 1,
         spawn_read_thread = False
     )
     client.connect()
