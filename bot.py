@@ -115,21 +115,6 @@ def process_update(update):
         client.send_message(update.message.from_id, Translation.STILL_NOT_HANDLED_MSG)
 
 if __name__ == "__main__":
-    client = TelegramClient(
-        Config.TL_SESSION,
-        Config.APP_ID,
-        Config.API_HASH,
-        update_workers = 1,
-        spawn_read_thread = False
-    )
-    client.connect()
-    if not client.is_user_authorized():
-        # https://github.com/LonamiWebs/Telethon/issues/36#issuecomment-287735063
-        client.sign_in(bot_token=Config.TG_BOT_TOKEN)
-    me = client.get_me()
-    logger.info(me.stringify())
-    if not os.path.exists(Config.DOWNLOAD_LOCATION):
-        os.makedirs(Config.DOWNLOAD_LOCATION)
     # Create the Updater and pass it your bot's token.
     updater = Updater(token=Config.TG_BOT_TOKEN)
     client.add_event_handler(process_update)
@@ -145,6 +130,21 @@ if __name__ == "__main__":
     else:
         logger.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4)
+    client = TelegramClient(
+        Config.TL_SESSION,
+        Config.APP_ID,
+        Config.API_HASH,
+        update_workers = 1,
+        spawn_read_thread = False
+    )
+    client.connect()
+    if not client.is_user_authorized():
+        # https://github.com/LonamiWebs/Telethon/issues/36#issuecomment-287735063
+        client.sign_in(bot_token=Config.TG_BOT_TOKEN)
+    me = client.get_me()
+    logger.info(me.stringify())
+    if not os.path.exists(Config.DOWNLOAD_LOCATION):
+        os.makedirs(Config.DOWNLOAD_LOCATION)
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT
     updater.idle()
