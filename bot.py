@@ -117,7 +117,6 @@ def process_update(update):
 if __name__ == "__main__":
     # Create the Updater and pass it your bot's token.
     updater = Updater(token=Config.TG_BOT_TOKEN)
-    client.add_event_handler(process_update)
     # Start the Bot
     if Config.WEBHOOK:
         logger.info("Using webhooks.")
@@ -145,6 +144,7 @@ if __name__ == "__main__":
     logger.info(me.stringify())
     if not os.path.exists(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
+    client.add_event_handler(process_update)
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT
     updater.idle()
