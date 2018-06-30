@@ -141,7 +141,7 @@ if __name__ == "__main__":
             port=Config.EXAMPLE_WEB_PORT,
             url_path=Config.TG_BOT_TOKEN
         )
-        updater.bot.set_webhook(url=URL + TOKEN)
+        updater.bot.set_webhook(url=Config.EXAMPLE_WEB_DOMAIN + TOKEN)
     else:
         logger.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4)
