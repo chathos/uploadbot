@@ -1,6 +1,5 @@
 certifi==2018.4.16
 chardet==3.0.4
-chatbase==0.2.1
 cryptg==0.1.0.7
 future==0.16.0
 idna==2.6

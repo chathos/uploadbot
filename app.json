@@ -11,10 +11,6 @@
   "logo": "https://i.imgur.com/0imUhtI.jpg",
   "repository": "https://github.com/SpEcHiDe/YAUploadBot",
   "env": {
-    "CHAT_BASE_TOKEN": {
-      "description": "get a token from http://chatbase.com",
-      "value": ""
-    },
     "TG_BOT_TOKEN": {
       "description": "get a token from @BotFather",
       "value": ""
