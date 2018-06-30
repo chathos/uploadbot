@@ -11,8 +11,8 @@
   "logo": "https://i.imgur.com/0imUhtI.jpg",
   "repository": "https://github.com/SpEcHiDe/YAUploadBot",
   "env": {
-    "BOTAN_IO_TOKEN": {
-      "description": "get a token from http://botan.io",
+    "CHAT_BASE_TOKEN": {
+      "description": "get a token from http://chatbase.com",
       "value": ""
     },
     "TG_BOT_TOKEN": {
@@ -24,8 +24,8 @@
       "value": ""
     },
     "EXAMPLE_WEB_PORT": {
-      "description": "The Heroku App port, usually 5000",
-      "value": "5000"
+      "description": "Port to use for your webhooks",
+      "value": "8443"
     },
     "DOWNLOAD_LOCATION": {
       "description": "the download location, where the HTTP Server runs",
@@ -46,6 +46,10 @@
     "AUTHORIZED_USERS": {
       "description": "comma seperated values of Telegram IDs obtained from https://telegram.dog/GetIDsBot",
       "value": ""
+    },
+    "WEBHOOK": {
+      "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
+      "value": "ANYTHING"
     }
   }
 }

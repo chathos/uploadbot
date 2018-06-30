@@ -1,14 +1,12 @@
 import os
 
 class Config(object):
-    # get a token from http://botan.io
-    BOTAN_IO_TOKEN = os.environ.get("BOTAN_IO_TOKEN", "")
+    # get a token from http://chatbase.com
+    CHAT_BASE_TOKEN = os.environ.get("CHAT_BASE_TOKEN", "")
     # get a token from @BotFather
     TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
     # the domain of your web server
     EXAMPLE_WEB_DOMAIN = os.environ.get("EXAMPLE_WEB_DOMAIN", "https://example.com")
-    # port the web server should listen on
-    EXAMPLE_WEB_PORT = int(os.environ.get("EXAMPLE_WEB_PORT", 5000))
     # the download location, where the HTTP Server runs
     DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "DOWNLOADS")
     # Telegram maximum file upload size
@@ -23,4 +21,7 @@ class Config(object):
     # Python3 ReQuests CHUNK SIZE
     CHUNK_SIZE = 128
     # localhost PLEASE DO NOT CHANGE THIS VALUE #ForTheGreaterGood
-    EXAMPLE_WEB_HOST = "127.0.0.1"
+    EXAMPLE_WEB_HOST = "0.0.0.0"
+    EXAMPLE_WEB_PORT = int(os.environ.get("EXAMPLE_WEB_PORT", 8443))
+    # for heroku specific things
+    WEBHOOK = os.environ.get("WEBHOOK", None)

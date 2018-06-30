@@ -22,6 +22,8 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ForwardMessagesRequest
 from telethon.utils import get_display_name
 
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
+
 import os
 # https://www.codementor.io/aviaryan/downloading-files-from-urls-in-python-77q3bs0un
 import requests
@@ -128,10 +130,21 @@ if __name__ == "__main__":
     logger.info(me.stringify())
     if not os.path.exists(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
+    # Create the Updater and pass it your bot's token.
+    updater = Updater(token=Config.TG_BOT_TOKEN)
     client.add_event_handler(process_update)
-    # # create a http.server
-    # server_address = (Config.EXAMPLE_WEB_HOST, Config.EXAMPLE_WEB_PORT)
-    # httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
-    # # https://stackoverflow.com/a/19706670/4723940
-    # httpd.start()
-    client.idle()  # ends with Ctrl+C
+    # Start the Bot
+    if Config.WEBHOOK:
+        logger.info("Using webhooks.")
+        updater.start_webhook(
+            listen=Config.EXAMPLE_WEB_HOST,
+            port=Config.EXAMPLE_WEB_PORT,
+            url_path=Config.TG_BOT_TOKEN
+        )
+        updater.bot.set_webhook(url=URL + TOKEN)
+    else:
+        logger.info("Using long polling.")
+        updater.start_polling(timeout=15, read_latency=4)
+    # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
+    # SIGTERM or SIGABRT
+    updater.idle()
