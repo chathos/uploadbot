@@ -19,10 +19,6 @@
       "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
       "value": ""
     },
-    "EXAMPLE_WEB_PORT": {
-      "description": "Port to use for your webhooks",
-      "value": "8443"
-    },
     "DOWNLOAD_LOCATION": {
       "description": "the download location, where the HTTP Server runs",
       "value": "DOWNLOADS"

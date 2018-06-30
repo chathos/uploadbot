@@ -20,6 +20,6 @@ class Config(object):
     CHUNK_SIZE = 128
     # localhost PLEASE DO NOT CHANGE THIS VALUE #ForTheGreaterGood
     EXAMPLE_WEB_HOST = "0.0.0.0"
-    EXAMPLE_WEB_PORT = int(os.environ.get("EXAMPLE_WEB_PORT", 8443))
+    EXAMPLE_WEB_PORT = int(os.environ.get("PORT", 8443))
     # for heroku specific things
     WEBHOOK = os.environ.get("WEBHOOK", None)
